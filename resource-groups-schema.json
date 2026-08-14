@@ -2,59 +2,73 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Resource Groups Schema",
   "description": "Schema for Azure resource group configurations with tags and locations",
-  "type": "array",
-  "items": {
-    "type": "object",
-    "required": [
-      "Name",
-      "Tags",
-      "Location"
-    ],
-    "properties": {
-      "Name": {
-        "description": "The name of the Azure resource group",
-        "type": "string",
-        "pattern": "^rg-[a-zA-Z0-9-]+$"
-      },
-      "Tags": {
-        "description": "Tags to be applied to the resource group",
+  "type": "object",
+  "required": [
+    "values"
+  ],
+  "properties": {
+    "$schema": {
+      "description": "Optional schema reference for tooling.",
+      "type": "string"
+    },
+    "values": {
+      "description": "Array of Azure resource group configurations",
+      "type": "array",
+      "items": {
         "type": "object",
         "required": [
-          "service",
-          "environment",
-          "location"
+          "Name",
+          "Tags",
+          "Location"
         ],
         "properties": {
-          "service": {
-            "description": "Service identifier",
+          "Name": {
+            "description": "The name of the Azure resource group",
             "type": "string",
-            "minLength": 1
+            "pattern": "^rg-[a-zA-Z0-9-]+$"
           },
-          "environment": {
-            "description": "Environment name",
-            "type": "string",
-            "enum": [
-              "development",
-              "staging",
-              "non-production",
-              "production"
-            ]
+          "Tags": {
+            "description": "Tags to be applied to the resource group",
+            "type": "object",
+            "required": [
+              "service",
+              "environment",
+              "location"
+            ],
+            "properties": {
+              "service": {
+                "description": "Service identifier",
+                "type": "string",
+                "minLength": 1
+              },
+              "environment": {
+                "description": "Environment name",
+                "type": "string",
+                "enum": [
+                  "development",
+                  "staging",
+                  "non-production",
+                  "production"
+                ]
+              },
+              "location": {
+                "description": "Azure location identifier",
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": true
           },
-          "location": {
-            "description": "Azure location identifier",
+          "Location": {
+            "description": "Azure region where the resource group will be created",
             "type": "string",
             "minLength": 1
           }
         },
-        "additionalProperties": true
+        "additionalProperties": false
       },
-      "Location": {
-        "description": "Azure region where the resource group will be created",
-        "type": "string",
-        "minLength": 1
-      }
-    },
-    "additionalProperties": false
+      "minItems": 1
+    }
   },
-  "minItems": 1
+  "additionalProperties": false
 }
