@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Global Settings Schema",
+  "description": "Global settings for OneMinded IDP Quickstart Toolbox",
+  "type": "object",
+  "required": [
+    "uniqueId",
+    "serviceShort",
+    "serviceDisplayName",
+    "region",
+    "regionCode",
+    "branchingStrategy"
+  ],
+  "properties": {
+    "$schema": {
+      "description": "Optional schema reference for tooling.",
+      "type": "string"
+    },
+    "uniqueId": {
+      "description": "Unique identifier for the deployment",
+      "type": "string",
+      "pattern": "^[a-z0-9]{6,12}$"
+    },
+    "serviceShort": {
+      "description": "Short service name used in resource names.",
+      "type": "string",
+      "minLength": 1
+    },
+    "serviceDisplayName": {
+      "description": "Display name for the service",
+      "type": "string",
+      "minLength": 1
+    },
+    "region": {
+      "description": "Azure region name used for the deployment.",
+      "type": "string",
+      "minLength": 1
+    },
+    "regionCode": {
+      "description": "Azure region code used in names.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 5
+    },
+    "branchingStrategy": {
+      "description": "Repository branching strategy.",
+      "type": "string",
+      "enum": [
+        "github",
+        "release"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
