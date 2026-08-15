@@ -1,5 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/oneminded/idp-schemas/refs/heads/main/global-settings-schema.json",
   "title": "Global Settings Schema",
   "description": "Global settings for OneMinded IDP Quickstart Toolbox",
   "type": "object",

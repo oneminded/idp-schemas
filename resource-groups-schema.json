@@ -1,5 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/oneminded/idp-schemas/refs/heads/main/resource-groups-schema.json",
   "title": "Resource Groups Schema",
   "description": "Schema for Azure resource group configurations with tags and locations",
   "type": "object",
