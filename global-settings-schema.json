@@ -5,16 +5,28 @@
   "description": "Global settings for OneMinded IDP Quickstart Toolbox",
   "type": "object",
   "required": [
+    "tenantId",
     "uniqueId",
     "serviceShort",
     "serviceDisplayName",
-    "region",
     "regionCode",
     "branchingStrategy"
+  ],
+  "anyOf": [
+    { "required": ["location"] },
+    { "required": ["region"] }
   ],
   "properties": {
     "$schema": {
       "description": "Optional schema reference for tooling.",
+      "type": "string"
+    },
+    "tenantId": {
+      "description": "The Azure tenant ID (GUID) for the deployment.",
+      "type": "string"
+    },
+    "subscriptionId": {
+      "description": "The Azure subscription ID (GUID) for the deployment.",
       "type": "string"
     },
     "uniqueId": {
@@ -32,16 +44,33 @@
       "type": "string",
       "minLength": 1
     },
-    "region": {
-      "description": "Azure region name used for the deployment.",
+    "location": {
+      "description": "Azure location name used for the deployment.",
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "examples": [
+        "westeurope",
+        "northeurope"
+      ]
+    },
+    "region": {
+      "description": "Azure region name used for the deployment (alias for location).",
+      "type": "string",
+      "minLength": 1,
+      "examples": [
+        "westeurope",
+        "northeurope"
+      ]
     },
     "regionCode": {
       "description": "Azure region code used in names.",
       "type": "string",
       "minLength": 1,
-      "maxLength": 5
+      "maxLength": 5,
+      "examples": [
+        "weu",
+        "neu"
+      ]
     },
     "branchingStrategy": {
       "description": "Repository branching strategy.",
