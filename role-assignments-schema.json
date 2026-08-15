@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://raw.githubusercontent.com/oneminded/idp-schemas/refs/heads/main/role-assignments-schema.json",
+    "title": "Role Assignments Schema",
+    "description": "Schema for defining Azure role assignments configuration",
+    "type": "object",
+    "required": ["values"],
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "description": "Reference to the JSON schema"
+        },
+        "values": {
+            "type": "array",
+            "description": "Array of Azure role assignment definitions",
+            "items": {
+                "type": "object",
+                "required": ["ObjectId", "Role", "Scope"],
+                "properties": {
+                    "ObjectId": {
+                        "type": "string",
+                        "description": "The object ID (GUID) of the principal (user, group, service principal, or managed identity) to assign the role to"
+                    },
+                    "Role": {
+                        "type": "string",
+                        "description": "The name of the Azure built-in or custom role to assign",
+                        "minLength": 1,
+                        "maxLength": 256,
+                        "examples": [
+                            "Reader",
+                            "Contributor",
+                            "Owner"
+                        ]
+                    },
+                    "Scope": {
+                        "type": "string",
+                        "description": "The scope at which the role assignment applies (subscription, resource group, or resource level)",
+                        "minLength": 1,
+                        "examples": [
+                            "/subscriptions/00000000-0000-0000-0000-000000000000",
+                            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example",
+                            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Microsoft.Storage/storageAccounts/stexample"
+                        ]
+                    }
+                },
+                "additionalProperties": false
+            },
+            "minItems": 1
+        }
+    },
+    "additionalProperties": false
+}
