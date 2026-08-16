@@ -15,35 +15,35 @@
             "description": "Array of security group definitions with optional role assignments",
             "items": {
                 "type": "object",
-                "required": ["DisplayName", "MailNickName", "Description"],
+                "required": ["displayName", "mailNickName", "description"],
                 "properties": {
-                    "DisplayName": {
+                    "displayName": {
                         "type": "string",
                         "description": "Display name of the security group",
                         "minLength": 1,
                         "maxLength": 256
                     },
-                    "MailNickName": {
+                    "mailNickName": {
                         "type": "string",
                         "description": "Mail nickname for the security group (must be unique and follow naming conventions)",
                         "minLength": 1,
                         "maxLength": 64,
                         "pattern": "^[a-z0-9-]+$"
                     },
-                    "Description": {
+                    "description": {
                         "type": "string",
                         "description": "Description of the security group's purpose",
                         "minLength": 1,
                         "maxLength": 1024
                     },
-                    "RoleAssignments": {
+                    "roleAssignments": {
                         "type": "array",
                         "description": "Optional array of Azure role assignments to be applied to this security group",
                         "items": {
                             "type": "object",
-                            "required": ["Role", "Scope"],
+                            "required": ["role", "scope"],
                             "properties": {
-                                "Role": {
+                                "role": {
                                     "type": "string",
                                     "description": "The name of the Azure built-in or custom role to assign",
                                     "minLength": 1,
@@ -55,7 +55,7 @@
                                         "Storage Blob Data Contributor"
                                     ]
                                 },
-                                "Scope": {
+                                "scope": {
                                     "type": "string",
                                     "description": "The scope at which the role assignment applies (subscription, resource group, or resource level)",
                                     "minLength": 1,
