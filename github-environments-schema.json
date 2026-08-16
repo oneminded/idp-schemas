@@ -1,0 +1,110 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://raw.githubusercontent.com/oneminded/idp-schemas/refs/heads/main/github-environments-schema.json",
+    "title": "GitHub Environments Configuration",
+    "description": "Schema for configuring GitHub repository environments with secrets and variables",
+    "type": "object",
+    "required": [
+        "Owner",
+        "Repository",
+        "Environments"
+    ],
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "description": "The schema reference URL"
+        },
+        "Owner": {
+            "type": "string",
+            "description": "The GitHub organization or user that owns the repository",
+            "minLength": 1
+        },
+        "Repository": {
+            "type": "string",
+            "description": "The name of the GitHub repository",
+            "minLength": 1
+        },
+        "Environments": {
+            "type": "array",
+            "description": "List of environments to configure",
+            "minItems": 1,
+            "items": {
+                "$ref": "#/definitions/environment"
+            }
+        }
+    },
+    "definitions": {
+        "environment": {
+            "type": "object",
+            "description": "A GitHub environment configuration",
+            "required": [
+                "Name"
+            ],
+            "properties": {
+                "Name": {
+                    "type": "string",
+                    "description": "The name of the environment (e.g., DEVELOPMENT, STAGING, PRODUCTION)",
+                    "minLength": 1
+                },
+                "Secrets": {
+                    "type": "array",
+                    "description": "List of secrets for this environment",
+                    "items": {
+                        "$ref": "#/definitions/secret"
+                    },
+                    "default": []
+                },
+                "Variables": {
+                    "type": "array",
+                    "description": "List of variables for this environment",
+                    "items": {
+                        "$ref": "#/definitions/variable"
+                    },
+                    "default": []
+                }
+            },
+            "additionalProperties": false
+        },
+        "secret": {
+            "type": "object",
+            "description": "A secret key-value pair",
+            "required": [
+                "Name",
+                "Value"
+            ],
+            "properties": {
+                "Name": {
+                    "type": "string",
+                    "description": "The name of the secret",
+                    "minLength": 1
+                },
+                "Value": {
+                    "type": "string",
+                    "description": "The value of the secret (can include variable substitutions like ${VARIABLE_NAME})"
+                }
+            },
+            "additionalProperties": false
+        },
+        "variable": {
+            "type": "object",
+            "description": "A variable key-value pair",
+            "required": [
+                "Name",
+                "Value"
+            ],
+            "properties": {
+                "Name": {
+                    "type": "string",
+                    "description": "The name of the variable",
+                    "minLength": 1
+                },
+                "Value": {
+                    "type": "string",
+                    "description": "The value of the variable (can include variable substitutions like ${VARIABLE_NAME})"
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}
