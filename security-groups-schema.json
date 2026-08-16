@@ -15,22 +15,22 @@
             "description": "Array of security group definitions",
             "items": {
                 "type": "object",
-                "required": ["DisplayName", "MailNickName", "Description"],
+                "required": ["displayName", "mailNickName", "description"],
                 "properties": {
-                    "DisplayName": {
+                    "displayName": {
                         "type": "string",
                         "description": "Display name of the security group",
                         "minLength": 1,
                         "maxLength": 256
                     },
-                    "MailNickName": {
+                    "mailNickName": {
                         "type": "string",
                         "description": "Mail nickname for the security group (must be unique and follow naming conventions)",
                         "minLength": 1,
                         "maxLength": 64,
                         "pattern": "^[a-z0-9-]+$"
                     },
-                    "Description": {
+                    "description": {
                         "type": "string",
                         "description": "Description of the security group's purpose",
                         "minLength": 1,

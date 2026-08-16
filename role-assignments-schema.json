@@ -15,13 +15,13 @@
             "description": "Array of Azure role assignment definitions",
             "items": {
                 "type": "object",
-                "required": ["ObjectId", "Role", "Scope"],
+                "required": ["objectId", "role", "scope"],
                 "properties": {
-                    "ObjectId": {
+                    "objectId": {
                         "type": "string",
                         "description": "The object ID (GUID) of the principal (user, group, service principal, or managed identity) to assign the role to"
                     },
-                    "Role": {
+                    "role": {
                         "type": "string",
                         "description": "The name of the Azure built-in or custom role to assign",
                         "minLength": 1,
@@ -32,7 +32,7 @@
                             "Owner"
                         ]
                     },
-                    "Scope": {
+                    "scope": {
                         "type": "string",
                         "description": "The scope at which the role assignment applies (subscription, resource group, or resource level)",
                         "minLength": 1,

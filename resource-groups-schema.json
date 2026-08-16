@@ -18,17 +18,17 @@
       "items": {
         "type": "object",
         "required": [
-          "Name",
-          "Tags",
-          "Location"
+          "name",
+          "tags",
+          "location"
         ],
         "properties": {
-          "Name": {
+          "name": {
             "description": "The name of the Azure resource group",
             "type": "string",
             "pattern": "^rg-[a-zA-Z0-9-]+$"
           },
-          "Tags": {
+          "tags": {
             "description": "Tags to be applied to the resource group",
             "type": "object",
             "required": [
@@ -45,7 +45,7 @@
               "environment": {
                 "description": "Environment name",
                 "type": "string",
-                "enum": [
+                "examples": [
                   "development",
                   "staging",
                   "non-production",
@@ -60,7 +60,7 @@
             },
             "additionalProperties": true
           },
-          "Location": {
+          "location": {
             "description": "Azure region where the resource group will be created",
             "type": "string",
             "minLength": 1
