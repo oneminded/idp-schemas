@@ -1,1 +1,1 @@
-# one-developer-platform-schemas
+# OneMinded - IDP Schemas
