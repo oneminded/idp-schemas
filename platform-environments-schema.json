@@ -1,8 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://raw.githubusercontent.com/oneminded/idp-schemas/refs/heads/main/github-environments-schema.json",
-    "title": "GitHub Environments Configuration",
-    "description": "Schema for configuring GitHub repository environments with secrets and variables",
+    "$id": "https://raw.githubusercontent.com/oneminded/idp-schemas/refs/heads/main/platform-environments-schema.json",
+    "title": "Platform Environments Configuration",
+    "description": "Schema for configuring Azure e2e governance for GitHub repositories with OIDC and environments with secrets and variables",
     "type": "object",
     "required": [
         "owner",
@@ -44,7 +44,17 @@
                 "name": {
                     "type": "string",
                     "description": "The name of the environment (e.g., DEVELOPMENT, STAGING, PRODUCTION)",
-                    "minLength": 1
+                    "minLength": 1,
+                    "examples": [
+                        "DEVELOPMENT",
+                        "STAGING",
+                        "NON-PRODUCTION",
+                        "PRODUCTION"
+                    ]   
+                },
+                "servicePrincipal": {
+                    "description": "Service Principal configuration for this environment",
+                    "$ref": "#/definitions/servicePrincipal"
                 },
                 "secrets": {
                     "type": "array",
@@ -101,6 +111,51 @@
                 "value": {
                     "type": "string",
                     "description": "The value of the variable (can include variable substitutions like ${VARIABLE_NAME})"
+                }
+            },
+            "additionalProperties": false
+        },
+        "servicePrincipal": {
+            "type": "object",
+            "description": "Service Principal configuration for environment deployment",
+            "required": [
+                "displayName"
+            ],
+            "properties": {
+                "displayName": {
+                    "type": "string",
+                    "description": "Display name for the App Registration in Entra ID",
+                    "minLength": 1
+                },
+                "roleAssignments": {
+                    "type": "array",
+                    "description": "RBAC role assignments for the Service Principal",
+                    "items": {
+                        "$ref": "#/definitions/roleAssignment"
+                    },
+                    "default": []
+                }
+            },
+            "additionalProperties": false
+        },
+        "roleAssignment": {
+            "type": "object",
+            "description": "Azure RBAC role assignment",
+            "required": [
+                "role",
+                "scope"
+            ],
+            "properties": {
+                "role": {
+                    "type": "string",
+                    "description": "The Azure RBAC role name (e.g., Owner, Contributor, Reader)",
+                    "minLength": 1
+                },
+                "scope": {
+                    "type": "string",
+                    "description": "The scope for the role assignment (e.g., subscription or resource group path)",
+                    "minLength": 1,
+                    "pattern": "^/subscriptions/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(/resourceGroups/[^/]+)?$"
                 }
             },
             "additionalProperties": false
