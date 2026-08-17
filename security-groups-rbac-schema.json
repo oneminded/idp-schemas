@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "https://raw.githubusercontent.com/oneminded/idp-schemas/refs/heads/main/security-groups-rbac-schema.json",
-    "title": "Security Groups with RBAC Schema",
+    "title": "Security Groups with optional RBAC Schema",
     "description": "Schema for defining security groups with Azure role assignments configuration",
     "type": "object",
     "required": ["values"],
