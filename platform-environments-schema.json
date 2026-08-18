@@ -134,6 +134,11 @@
                         "$ref": "#/definitions/roleAssignment"
                     },
                     "default": []
+                },
+                "logoInputFile": {
+                    "type": "string",
+                    "description": "Path to the logo file for the App Registration",
+                    "examples": [".assets/om-icon.png"]
                 }
             },
             "additionalProperties": false
