@@ -153,9 +153,13 @@
                 },
                 "scope": {
                     "type": "string",
-                    "description": "The scope for the role assignment (e.g., subscription or resource group path)",
+                    "description": "The scope for the role assignment (e.g., management group, subscription, resource group or resource path)",
                     "minLength": 1,
-                    "pattern": "^/subscriptions/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(/resourceGroups/[^/]+)?$"
+                    "examples": [
+                            "/subscriptions/00000000-0000-0000-0000-000000000000",
+                            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example",
+                            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Microsoft.Storage/storageAccounts/stexample"
+                        ]
                 }
             },
             "additionalProperties": false
