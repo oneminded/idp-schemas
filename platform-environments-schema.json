@@ -56,6 +56,10 @@
                     "description": "Service Principal configuration for this environment",
                     "$ref": "#/definitions/servicePrincipal"
                 },
+                "userAssignedIdentity": {
+                    "description": "User Assigned Managed Identity configuration for this environment",
+                    "$ref": "#/definitions/userAssignedIdentity"
+                },
                 "secrets": {
                     "type": "array",
                     "description": "List of secrets for this environment",
@@ -72,6 +76,9 @@
                     },
                     "default": []
                 }
+            },
+            "not": {
+                "required": ["servicePrincipal", "userAssignedIdentity"]
             },
             "additionalProperties": false
         },
@@ -165,6 +172,49 @@
                             "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example",
                             "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Microsoft.Storage/storageAccounts/stexample"
                         ]
+                }
+            },
+            "additionalProperties": false
+        },
+        "userAssignedIdentity": {
+            "type": "object",
+            "description": "User Assigned Managed Identity configuration for environment deployment",
+            "required": [
+                "name",
+                "resourceGroupName",
+                "location"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the User Assigned Managed Identity",
+                    "minLength": 1
+                },
+                "resourceGroupName": {
+                    "type": "string",
+                    "description": "Resource group where the identity will be created",
+                    "minLength": 1
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Azure region for the identity",
+                    "minLength": 1
+                },
+                "tags": {
+                    "type": "object",
+                    "description": "Tags to apply to the managed identity"
+                },
+                "federatedCredentialName": {
+                    "type": "string",
+                    "description": "Name for the federated credential configuration"
+                },
+                "roleAssignments": {
+                    "type": "array",
+                    "description": "RBAC role assignments for the User Assigned Managed Identity",
+                    "items": {
+                        "$ref": "#/definitions/roleAssignment"
+                    },
+                    "default": []
                 }
             },
             "additionalProperties": false
