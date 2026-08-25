@@ -28,6 +28,10 @@
             "minLength": 1,
             "description": "The display name for the app registration. Use this property to create a new app."
           },
+          "Note": {
+            "type": "string",
+            "description": "Optional note or description about the app registration purpose and usage."
+          },
           "LogoInputFile": {
             "type": "string",
             "description": "Path to the application logo file (PNG format recommended)."
@@ -90,6 +94,14 @@
             },
             "additionalProperties": false,
             "description": "Web platform configuration including redirect URIs and implicit grant settings."
+          },
+          "SPARedirectUri": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "Redirect URIs for Single Page Application (SPA) platform. These URIs are used for implicit flow authentication in SPAs."
           },
           "AppRole": {
             "type": "array",
