@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/oneminded/idp-schemas/refs/heads/main/app-registration-schema.json",
+  "title": "App Registration Configuration",
+  "description": "Schema for Azure AD App Registration configuration",
+  "type": "object",
+  "required": [
+    "values"
+  ],
+  "properties": {
+    "$schema": {
+      "description": "Optional schema reference for tooling.",
+      "type": "string"
+    },
+    "values": {
+      "description": "Array of Azure AD App Registration configurations",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "AppObjectId": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "description": "The object ID of an existing app registration. Use this property to update an existing app."
+          },
+          "DisplayName": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The display name for the app registration. Use this property to create a new app."
+          },
+          "LogoInputFile": {
+            "type": "string",
+            "description": "Path to the application logo file (PNG format recommended)."
+          },
+          "SignInAudience": {
+            "type": "string",
+            "enum": [
+              "AzureADMyOrg",
+              "AzureADMultipleOrgs",
+              "AzureADandPersonalMicrosoftAccount",
+              "PersonalMicrosoftAccount"
+            ],
+            "description": "Specifies what Microsoft accounts are supported for the current application. Valid values: AzureADMyOrg (single tenant), AzureADMultipleOrgs (multi-tenant), AzureADandPersonalMicrosoftAccount (multi-tenant with personal accounts), PersonalMicrosoftAccount (personal accounts only)."
+          },
+          "Web": {
+            "type": "object",
+            "properties": {
+              "RedirectUri": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "description": "Specifies the URLs where user tokens are sent for sign-in, or the redirect URIs where OAuth 2.0 authorization codes and access tokens are sent."
+              },
+              "ImplicitGrantSetting": {
+                "type": "object",
+                "properties": {
+                  "EnableAccessTokenIssuance": {
+                    "type": "boolean",
+                    "description": "Specifies whether this web application can request an access token using the OAuth 2.0 implicit flow."
+                  },
+                  "EnableIdTokenIssuance": {
+                    "type": "boolean",
+                    "description": "Specifies whether this web application can request an ID token using the OAuth 2.0 implicit flow."
+                  }
+                },
+                "additionalProperties": false
+              },
+              "HomePageUrl": {
+                "type": "string",
+                "format": "uri",
+                "description": "The URL to the application's homepage."
+              },
+              "privacyStatementUrl": {
+                "type": "string",
+                "format": "uri",
+                "description": "The URL to the application's privacy statement."
+              },
+              "termsOfServiceUrl": {
+                "type": "string",
+                "format": "uri",
+                "description": "The URL to the application's terms of service statement."
+              },
+              "LogoutUrl": {
+                "type": "string",
+                "format": "uri",
+                "description": "The URL where the service logs out the user."
+              }
+            },
+            "additionalProperties": false,
+            "description": "Web platform configuration including redirect URIs and implicit grant settings."
+          },
+          "AppRole": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "Id",
+                "DisplayName",
+                "Description",
+                "Value",
+                "AllowedMemberType",
+                "IsEnabled"
+              ],
+              "properties": {
+                "Id": {
+                  "type": "string",
+                  "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                  "description": "Unique GUID identifier for the app role."
+                },
+                "DisplayName": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Display name for the app role that appears in app assignment and consent experiences."
+                },
+                "Description": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Description of the app role that appears in app assignment and consent experiences."
+                },
+                "Value": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Specifies the value to include in the roles claim in tokens."
+                },
+                "AllowedMemberType": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "User",
+                      "Application"
+                    ]
+                  },
+                  "description": "Specifies whether this app role can be assigned to users and/or applications. Valid values: User, Application, or both."
+                },
+                "IsEnabled": {
+                  "type": "boolean",
+                  "description": "Determines if the app role is enabled."
+                }
+              },
+              "additionalProperties": false
+            },
+            "description": "Collection of app roles that an application may declare. These roles can be assigned to users, groups, or service principals."
+          },
+          "OptionalClaim": {
+            "type": "object",
+            "properties": {
+              "IdToken": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/claim"
+                },
+                "description": "Optional claims to be included in ID tokens."
+              },
+              "AccessToken": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/claim"
+                },
+                "description": "Optional claims to be included in access tokens."
+              },
+              "Saml2Token": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/claim"
+                },
+                "description": "Optional claims to be included in SAML2 tokens."
+              }
+            },
+            "additionalProperties": false,
+            "description": "Configuration for optional claims in ID tokens, access tokens, and SAML2 tokens."
+          },
+          "GroupMembershipClaim": {
+            "type": "string",
+            "enum": [
+              "None",
+              "SecurityGroup",
+              "All",
+              "ApplicationGroup"
+            ],
+            "description": "Configures the groups claim issued in a user or OAuth 2.0 access token that the application expects. Valid values: None, SecurityGroup, All, ApplicationGroup."
+          }
+        },
+        "additionalProperties": false,
+        "oneOf": [
+          {
+            "required": [
+              "AppObjectId"
+            ]
+          },
+          {
+            "required": [
+              "DisplayName"
+            ]
+          }
+        ],
+        "description": "Represents a single app registration configuration. Must contain either AppObjectId (for updates) or DisplayName (for creates)."
+      },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "claim": {
+      "type": "object",
+      "required": [
+        "Name"
+      ],
+      "properties": {
+        "Name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The name of the optional claim."
+        },
+        "Essential": {
+          "type": "boolean",
+          "description": "If the value is true, the claim specified by the client is necessary to ensure a smooth authorization experience."
+        },
+        "Source": {
+          "type": "string",
+          "description": "The source of the claim. Can be a predefined directory attribute or an extension attribute."
+        },
+        "AdditionalProperties": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Additional properties of the claim that modify its behavior."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Represents an optional claim configuration."
+    }
+  }
+}
