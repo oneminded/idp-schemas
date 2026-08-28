@@ -1,0 +1,51 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://raw.githubusercontent.com/oneminded/idp-schemas/refs/heads/main/app-role-assignments-schema.json",
+    "title": "App Role Assignments Schema",
+    "description": "Schema for defining application role assignments configuration",
+    "type": "object",
+    "required": ["values"],
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "description": "Reference to the JSON schema"
+        },
+        "values": {
+            "type": "array",
+            "description": "Array of app role assignment definitions",
+            "items": {
+                "type": "object",
+                "required": ["resourceId", "principalId", "appRoleId"],
+                "properties": {
+                    "resourceId": {
+                        "type": "string",
+                        "description": "The Object ID (GUID) of the service principal associated with the application",
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "examples": [
+                            "12345678-1234-1234-1234-123456789012"
+                        ]
+                    },
+                    "principalId": {
+                        "type": "string",
+                        "description": "The Object ID (GUID) of the user, group, or service principal to assign the role to",
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "examples": [
+                            "87654321-4321-4321-4321-210987654321"
+                        ]
+                    },
+                    "appRoleId": {
+                        "type": "string",
+                        "description": "The ID (GUID) of the app role to assign to the principal",
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "examples": [
+                            "00000000-0000-0000-0000-000000000000"
+                        ]
+                    }
+                },
+                "additionalProperties": false
+            },
+            "minItems": 1
+        }
+    },
+    "additionalProperties": false
+}
