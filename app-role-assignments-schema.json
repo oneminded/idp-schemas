@@ -19,26 +19,26 @@
                 "properties": {
                     "resourceId": {
                         "type": "string",
-                        "description": "The Object ID (GUID) of the service principal associated with the application",
-                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "description": "The Object ID (GUID) of the service principal associated with the application. Accepts a GUID or a placeholder token (e.g. ${ResourceId}).",
                         "examples": [
-                            "12345678-1234-1234-1234-123456789012"
+                            "00000000-0000-0000-0000-000000000000",
+                            "${ResourceId}"
                         ]
                     },
                     "principalId": {
                         "type": "string",
-                        "description": "The Object ID (GUID) of the user, group, or service principal to assign the role to",
-                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "description": "The Object ID (GUID) of the user, group, or service principal to assign the role to. Accepts a GUID or a placeholder token (e.g. ${PrincipalId}).",
                         "examples": [
-                            "87654321-4321-4321-4321-210987654321"
+                            "00000000-0000-0000-0000-000000000000",
+                            "${PrincipalId}"
                         ]
                     },
                     "appRoleId": {
                         "type": "string",
-                        "description": "The ID (GUID) of the app role to assign to the principal",
-                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "description": "The ID (GUID) of the app role to assign to the principal. Accepts a GUID or a placeholder token (e.g. ${AppRoleId}).",
                         "examples": [
-                            "00000000-0000-0000-0000-000000000000"
+                            "00000000-0000-0000-0000-000000000000",
+                            "${AppRoleId}"
                         ]
                     }
                 },

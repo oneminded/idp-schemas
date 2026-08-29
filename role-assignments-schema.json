@@ -19,7 +19,11 @@
                 "properties": {
                     "objectId": {
                         "type": "string",
-                        "description": "The object ID (GUID) of the principal (user, group, service principal, or managed identity) to assign the role to"
+                        "description": "The object ID (GUID) of the principal (user, group, service principal, or managed identity) to assign the role to. Accepts a GUID or a placeholder token (e.g. ${ObjectId}).",
+                        "examples": [
+                            "00000000-0000-0000-0000-000000000000",
+                            "${ObjectId}"
+                        ]
                     },
                     "role": {
                         "type": "string",

@@ -20,8 +20,11 @@
         "properties": {
           "AppObjectId": {
             "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-            "description": "The object ID of an existing app registration. Use this property to update an existing app."
+            "description": "The object ID (GUID) of an existing app registration. Use this property to update an existing app. Accepts a GUID or a placeholder token (e.g. ${AppObjectId}).",
+            "examples": [
+                "00000000-0000-0000-0000-000000000000",
+                "${AppObjectId}"
+            ]
           },
           "DisplayName": {
             "type": "string",
@@ -118,8 +121,11 @@
               "properties": {
                 "Id": {
                   "type": "string",
-                  "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-                  "description": "Unique GUID identifier for the app role."
+                  "description": "The ID (GUID) of the app role. Accepts a GUID or a placeholder token (e.g. ${AppRoleId}).",
+                  "examples": [
+                      "00000000-0000-0000-0000-000000000000",
+                      "${AppRoleId}"
+                  ]
                 },
                 "DisplayName": {
                   "type": "string",
