@@ -22,12 +22,20 @@
       "type": "string"
     },
     "tenantId": {
-      "description": "The Azure tenant ID (GUID) for the deployment.",
-      "type": "string"
+      "description": "The Azure tenant ID (GUID) for the deployment. Accepts a GUID or a placeholder token (e.g. ${TenantId}).",
+      "type": "string",
+      "examples": [
+          "00000000-0000-0000-0000-000000000000",
+          "${TenantId}"
+      ]
     },
     "subscriptionId": {
-      "description": "The Azure subscription ID (GUID) for the deployment.",
-      "type": "string"
+      "description": "The Azure subscription ID (GUID) for the deployment. Accepts a GUID or a placeholder token (e.g. ${SubscriptionId}).",
+      "type": "string",
+      "examples": [
+          "00000000-0000-0000-0000-000000000000",
+          "${SubscriptionId}"
+      ]
     },
     "uniqueId": {
       "description": "Unique identifier for the deployment",
