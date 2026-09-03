@@ -1,0 +1,54 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://raw.githubusercontent.com/oneminded/idp-schemas/refs/heads/main/app-test-users-schema.json",
+    "title": "App Test Users Schema",
+    "description": "Schema for defining Azure test user configuration",
+    "type": "object",
+    "required": ["values"],
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "description": "Reference to the JSON schema"
+        },
+        "values": {
+            "type": "array",
+            "description": "Array of Azure test user definitions",
+            "items": {
+                "type": "object",
+                "required": ["userPrincipalName", "displayName"],
+                "properties": {
+                    "userPrincipalName": {
+                        "type": "string",
+                        "description": "User principal name used to sign in to the test account",
+                        "minLength": 1,
+                        "format": "email"
+                    },
+                    "displayName": {
+                        "type": "string",
+                        "description": "Display name of the test user",
+                        "minLength": 1,
+                        "maxLength": 256
+                    },
+                    "mailNickname": {
+                        "type": "string",
+                        "description": "Mail alias for the test user",
+                        "minLength": 1,
+                        "maxLength": 64
+                    },
+                    "usageLocation": {
+                        "type": "string",
+                        "description": "Two-letter country or region code for the test user",
+                        "pattern": "^[A-Z]{2}$"
+                    },
+                    "accountEnabled": {
+                        "type": "boolean",
+                        "description": "Whether the test user account is enabled"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "minItems": 1
+        }
+    },
+    "additionalProperties": false
+}
