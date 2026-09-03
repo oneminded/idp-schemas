@@ -43,6 +43,10 @@
                     "accountEnabled": {
                         "type": "boolean",
                         "description": "Whether the test user account is enabled"
+                    },
+                    "forceChangePasswordNextSignIn": {
+                        "type": "boolean",
+                        "description": "Whether the user must change their password at the next sign-in"
                     }
                 },
                 "additionalProperties": false
